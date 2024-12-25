@@ -1,0 +1,34 @@
+package mk.ukim.finki.wp.lab.repository.inMemory;
+
+import mk.ukim.finki.wp.lab.model.Album;
+import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public class InMemoryAlbumRepository {
+    private List<Album> albums;
+
+    public InMemoryAlbumRepository() {
+        albums = new ArrayList<>();
+
+        albums.add(new Album("Minus i plus", "Pop", "1991"));
+        albums.add(new Album("Rumours", "Rock", "1977"));
+        albums.add(new Album("Od istoka do zapada", "Pop", "2014"));
+        albums.add(new Album("Kind of Blue", "Jazz", "1959"));
+        albums.add(new Album("Random Access Memories", "Electronic", "2013"));
+    }
+
+    public List<Album> findAll(){
+        return albums;
+    }
+
+    public Optional<Album> findById(Long id){
+        return albums.stream()
+                .filter(album -> album.getId().equals(id))
+                .findFirst();
+    }
+
+}
